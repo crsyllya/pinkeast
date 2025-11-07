@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PinkEast | Aksesoris Handmade</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/5556/5556499.png">
+</head>
+<body class="bg-gradient-to-b from-pink-100 to-white font-[Poppins] text-gray-800">
+
+  <!-- Navbar -->
+  <nav class="flex flex-wrap justify-between items-center px-6 md:px-12 py-4 bg-white shadow-sm sticky top-0 z-50">
+    <div class="flex items-center gap-2">
+      <img src="foto/logo.jpg" alt="Logo PinkEast" class="w-8 h-8 rounded-full object-cover">
+      <h1 class="text-2xl font-semibold text-pink-600">
+        Pink<span class="text-pink-400">East</span>
+      </h1>
+    </div>
+    
+    <!-- Tombol menu mobile -->
+    <button id="menuBtn" class="md:hidden text-pink-600 focus:outline-none">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+
+    <!-- Menu -->
+    <div id="menu" class="hidden w-full md:flex md:w-auto mt-4 md:mt-0 flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-6 text-gray-700 text-center md:text-left">
+      <a href="#home" class="hover:text-pink-600 transition">Beranda</a>
+      <a href="#contact" class="hover:text-pink-600 transition">Kontak</a>
+      <a href="#game" class="hover:text-pink-600 transition">Game</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="text-center py-16 px-4 md:py-20">
+    <h2 class="text-3xl md:text-5xl font-bold text-pink-600 mb-4 leading-tight">
+      Aksesoris Handmade Berkualitas
+    </h2>
+    <p class="text-base md:text-lg text-gray-600 max-w-2xl mx-auto mb-8">
+      Koleksi aksesoris eksklusif dari PinkEast — dibuat dengan tangan, penuh ketelitian, dan sentuhan estetika untuk melengkapi gaya kamu.
+    </p>
+
+    <img src="foto/our collection.jpg"
+      alt="Aksesoris Handmade"
+      class="mx-auto rounded-2xl shadow-lg w-full max-w-4xl mb-8 object-cover">
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="bg-pink-50 py-16 px-6">
+    <div class="max-w-2xl mx-auto text-center">
+      <h3 class="text-3xl font-bold text-pink-600 mb-6">Hubungi Kami</h3>
+      <p class="text-gray-600 mb-8 text-base md:text-lg">
+        Pesan aksesoris handmade pilihanmu atau hubungi kami untuk pemesanan custom.
+      </p>
+      <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+        <a href="https://wa.me/6281234567890" target="_blank"
+           class="bg-green-500 hover:bg-green-600 text-white px-5 py-2 rounded-md flex items-center space-x-2 transition w-40 justify-center">
+          <img src="https://cdn-icons-png.flaticon.com/512/124/124034.png" class="w-5 h-5" alt="WA">
+          <span>WhatsApp</span>
+        </a>
+        <a href="https://www.instagram.com/pinkeastt?igsh=dnlxZXFxY3I0ZXBk" target="_blank"
+           class="bg-pink-500 hover:bg-pink-600 text-white px-5 py-2 rounded-md flex items-center space-x-2 transition w-40 justify-center">
+          <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" class="w-5 h-5" alt="Instagram">
+          <span>Instagram</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Game Section -->
+  <section id="game" class="text-center py-20 px-4">
+    <h3 class="text-3xl font-bold text-pink-600 mb-4">Game Interaktif</h3>
+    <p class="text-gray-600 mb-6 max-w-lg mx-auto text-base md:text-lg">
+      Isi waktu luangmu dengan permainan seru dan sederhana dari PinkEast!
+    </p>
+    <a href="game.html"
+       class="bg-pink-500 hover:bg-pink-600 text-white px-6 py-3 rounded-lg font-medium shadow-md transition">
+       Mainkan Sekarang
+    </a>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-white py-6 border-t border-gray-200 text-center text-gray-600 text-sm px-4">
+    © 2025 PinkEast. Dibuat dengan ketelitian dan cinta 💗
+  </footer>
+
+  <!-- Script menu mobile -->
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const menu = document.getElementById('menu');
+    menuBtn.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+    });
+  </script>
+
+</body>
+</html>

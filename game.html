@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tangkap Permata | PinkEast</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-b from-pink-100 to-white font-poppins text-gray-800 flex flex-col items-center justify-center min-h-screen">
+
+  <!-- Judul -->
+  <div class="text-center mb-8">
+    <h1 class="text-4xl font-bold text-pink-600 flex items-center justify-center gap-2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-pink-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2 1 9l11 13 11-13z"/></svg>
+      Tangkap Permata
+    </h1>
+    <p class="text-lg text-gray-600 mt-2">Klik permata yang jatuh sebelum menyentuh tanah!</p>
+  </div>
+
+  <!-- Info -->
+  <div class="flex justify-center gap-8 mb-6 text-lg">
+    <p>⏱ Waktu: <span id="time" class="font-semibold text-pink-600">30</span>s</p>
+    <p>💎 Skor: <span id="score" class="font-semibold text-pink-600">0</span></p>
+  </div>
+
+  <!-- Area Game -->
+  <div id="gameArea" class="relative w-80 h-96 bg-white rounded-xl shadow-xl border-2 border-pink-300 overflow-hidden">
+    <div class="absolute bottom-0 w-full h-3 bg-pink-200"></div>
+  </div>
+
+  <!-- Tombol Mulai -->
+  <button id="startBtn"
+    class="mt-6 bg-pink-500 text-white px-6 py-2 rounded-xl hover:bg-pink-600 transition">
+    Mulai Game
+  </button>
+
+  <a href="index.html" class="mt-4 text-pink-600 hover:underline text-sm">← Kembali ke Halaman Utama</a>
+
+  <script>
+    const gameArea = document.getElementById('gameArea');
+    const startBtn = document.getElementById('startBtn');
+    const scoreDisplay = document.getElementById('score');
+    const timeDisplay = document.getElementById('time');
+
+    let score = 0;
+    let time = 30;
+    let gameInterval, timerInterval;
+
+    startBtn.addEventListener('click', startGame);
+
+    function startGame() {
+      score = 0;
+      time = 30;
+      scoreDisplay.textContent = score;
+      timeDisplay.textContent = time;
+      startBtn.disabled = true;
+      startBtn.classList.add('opacity-50', 'cursor-not-allowed');
+
+      timerInterval = setInterval(() => {
+        time--;
+        timeDisplay.textContent = time;
+        if (time <= 0) endGame();
+      }, 1000);
+
+      gameInterval = setInterval(spawnGem, 800);
+    }
+
+    function spawnGem() {
+      const gem = document.createElement('div');
+      gem.classList.add('absolute', 'w-8', 'h-8', 'bg-pink-500', 'rounded-full', 'cursor-pointer', 'shadow-md', 'transition-transform');
+      gem.style.left = Math.random() * 260 + 'px';
+      gem.style.top = '0px';
+      gameArea.appendChild(gem);
+
+      let pos = 0;
+      const fall = setInterval(() => {
+        pos += 5;
+        gem.style.top = pos + 'px';
+        if (pos >= 360) {
+          gem.remove();
+          clearInterval(fall);
+        }
+      }, 50);
+
+      gem.addEventListener('click', () => {
+        score++;
+        scoreDisplay.textContent = score;
+        gem.remove();
+        clearInterval(fall);
+      });
+
+      setTimeout(() => {
+        gem.remove();
+        clearInterval(fall);
+      }, 4000);
+    }
+
+    function endGame() {
+      clearInterval(gameInterval);
+      clearInterval(timerInterval);
+      startBtn.disabled = false;
+      startBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+      alert(`Waktu habis! Skor akhir kamu: ${score}`);
+    }
+  </script>
+
+</body>
+</html>
