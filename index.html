@@ -10,26 +10,29 @@
 <body class="bg-gradient-to-b from-pink-100 to-white font-[Poppins] text-gray-800">
 
   <!-- Navbar -->
-<nav class="flex flex-wrap justify-between items-center px-6 md:px-12 py-4 bg-white shadow-sm sticky top-0 z-50">
-  <div class="flex items-center gap-2">
-    <img src="foto/logo.jpg" alt="Logo PinkEast" class="w-8 h-8 rounded-full object-cover">
-    <h1 class="text-2xl font-semibold text-pink-600">
-      Pink<span class="text-pink-400">East</span>
-    </h1>
-  </div>
-  <button id="menuBtn" class="md:hidden text-pink-600 focus:outline-none">
-    <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M4 6h16M4 12h16M4 18h16" />
-    </svg>
-  </button>
-  <!-- Menu versi mobile & desktop -->
-  <div id="menu" class="hidden w-full md:flex md:w-auto flex-col md:flex-row items-start md:items-center mt-4 md:mt-0 text-gray-700">
-    <a href="#home" class="block w-full md:w-auto py-2 md:py-0 hover:text-pink-600 transition">Beranda</a>
-    <a href="#contact" class="block w-full md:w-auto py-2 md:py-0 hover:text-pink-600 transition">Kontak</a>
-    <a href="#game" class="block w-full md:w-auto py-2 md:py-0 hover:text-pink-600 transition">Game</a>
-  </div>
-</nav>
+  <nav class="flex flex-wrap justify-between items-center px-6 md:px-16 py-4 bg-white shadow-sm sticky top-0 z-50">
+    <!-- Logo -->
+    <div class="flex items-center gap-3">
+      <img src="foto/logo.jpg" alt="Logo PinkEast" class="w-9 h-9 rounded-full object-cover">
+      <h1 class="text-2xl font-semibold text-pink-600">
+        Pink<span class="text-pink-400">East</span>
+      </h1>
+    </div>
+
+    <!-- Tombol Menu (Mobile) -->
+    <button id="menuBtn" class="md:hidden text-pink-600 focus:outline-none">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+
+    <!-- Menu Navigasi -->
+    <div id="menu" class="hidden w-full md:flex md:w-auto flex-col md:flex-row items-start md:items-center mt-4 md:mt-0 text-gray-700 space-y-2 md:space-y-0 md:space-x-10">
+      <a href="#home" class="block py-2 md:py-0 hover:text-pink-600 transition">Beranda</a>
+      <a href="#contact" class="block py-2 md:py-0 hover:text-pink-600 transition">Kontak</a>
+      <a href="#game" class="block py-2 md:py-0 hover:text-pink-600 transition">Game</a>
+    </div>
   </nav>
 
   <!-- Hero Section -->
@@ -40,33 +43,38 @@
     <p class="text-base md:text-lg text-gray-600 max-w-2xl mx-auto mb-8">
       Koleksi aksesoris eksklusif dari PinkEast — dibuat dengan tangan, penuh ketelitian, dan sentuhan estetika untuk melengkapi gaya kamu.
     </p>
-
     <img src="foto/our collection.jpg"
       alt="Aksesoris Handmade"
       class="mx-auto rounded-2xl shadow-lg w-full max-w-4xl mb-8 object-cover">
   </section>
 
-  <!-- Contact Section -->
-  <section id="contact" class="bg-pink-50 py-16 px-6">
-    <div class="max-w-2xl mx-auto text-center">
-      <h3 class="text-3xl font-bold text-pink-600 mb-6">Hubungi Kami</h3>
-      <p class="text-gray-600 mb-8 text-base md:text-lg">
-        Pesan aksesoris handmade pilihanmu atau hubungi kami untuk pemesanan custom.
-      </p>
-      <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-        <a href="https://wa.me/0895415549098" target="_blank"
-           class="bg-green-500 hover:bg-green-600 text-white px-5 py-2 rounded-md flex items-center space-x-2 transition w-40 justify-center">
-          <img src="https://cdn-icons-png.flaticon.com/512/124/124034.png" class="w-5 h-5" alt="WA">
-          <span>WhatsApp</span>
-        </a>
-        <a href="https://www.instagram.com/pinkeastt?igsh=dnlxZXFxY3I0ZXBk" target="_blank"
-           class="bg-pink-500 hover:bg-pink-600 text-white px-5 py-2 rounded-md flex items-center space-x-2 transition w-40 justify-center">
-          <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" class="w-5 h-5" alt="Instagram">
-          <span>Instagram</span>
-        </a>
-      </div>
+<!-- Contact Section -->
+<section id="contact" class="bg-pink-50 py-16 px-6">
+  <div class="max-w-2xl mx-auto text-center">
+    <h3 class="text-3xl font-bold text-pink-600 mb-6">Hubungi Kami</h3>
+    <p class="text-gray-600 mb-8 text-base md:text-lg">
+      Pesan aksesoris handmade pilihanmu atau hubungi kami untuk pemesanan custom.
+    </p>
+
+    <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+      <!-- Tombol WhatsApp dengan pesan otomatis -->
+      <a href="https://wa.me/62895415549098?text=Hai%20PinkEast!%20Aku%20tertarik%20dengan%20aksesoris%20handmade%20kamu%20dan%20mau%20pesan%20dong%20💕"
+         target="_blank"
+         class="bg-green-500 hover:bg-green-600 text-white px-5 py-2 rounded-md flex items-center space-x-2 transition w-52 justify-center shadow-md">
+        <img src="https://cdn-icons-png.flaticon.com/512/124/124034.png" class="w-5 h-5" alt="WA">
+        <span>Chat via WhatsApp</span>
+      </a>
+
+      <!-- Tombol Instagram -->
+      <a href="https://www.instagram.com/pinkeastt?igsh=dnlxZXFxY3I0ZXBk" target="_blank"
+         class="bg-pink-500 hover:bg-pink-600 text-white px-5 py-2 rounded-md flex items-center space-x-2 transition w-52 justify-center shadow-md">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" class="w-5 h-5" alt="Instagram">
+        <span>Instagram</span>
+      </a>
     </div>
-  </section>
+  </div>
+</section>
+
 
   <!-- Game Section -->
   <section id="game" class="text-center py-20 px-4">
@@ -87,11 +95,11 @@
 
   <!-- Script menu mobile -->
   <script>
-  const menuBtn = document.getElementById('menuBtn');
-  const menu = document.getElementById('menu');
-  menuBtn.addEventListener('click', () => {
-    menu.classList.toggle('hidden');
-  });
-</script>
+    const menuBtn = document.getElementById('menuBtn');
+    const menu = document.getElementById('menu');
+    menuBtn.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+    });
+  </script>
 </body>
 </html>
