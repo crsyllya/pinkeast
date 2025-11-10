@@ -3,29 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tangkap Permata | PinkEast</title>
+  <title>Tangkap Hati | PinkEast</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gradient-to-b from-pink-100 to-white font-poppins text-gray-800 flex flex-col items-center justify-center min-h-screen">
 
   <!-- Judul -->
-  <div class="text-center mb-8">
+  <div class="text-center mb-6">
     <h1 class="text-4xl font-bold text-pink-600 flex items-center justify-center gap-2">
       <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-pink-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2 1 9l11 13 11-13z"/></svg>
-      Tangkap Permata
+      Tangkap Hati
     </h1>
-    <p class="text-lg text-gray-600 mt-2">Klik permata yang jatuh sebelum menyentuh tanah!</p>
+    <p class="text-lg text-gray-600 mt-1">Gunakan panah kiri & kanan untuk menangkap hati yang jatuh!</p>
   </div>
 
   <!-- Info -->
-  <div class="flex justify-center gap-8 mb-6 text-lg">
+  <div class="flex justify-center gap-8 mb-4 text-lg">
     <p>⏱ Waktu: <span id="time" class="font-semibold text-pink-600">30</span>s</p>
-    <p>💎 Skor: <span id="score" class="font-semibold text-pink-600">0</span></p>
+    <p>💗 Skor: <span id="score" class="font-semibold text-pink-600">0</span></p>
   </div>
 
   <!-- Area Game -->
   <div id="gameArea" class="relative w-80 h-96 bg-white rounded-xl shadow-xl border-2 border-pink-300 overflow-hidden">
-    <div class="absolute bottom-0 w-full h-3 bg-pink-200"></div>
+    <!-- Player -->
+    <div id="player" class="absolute bottom-2 left-36 w-16 h-6 bg-pink-500 rounded-full shadow-lg"></div>
   </div>
 
   <!-- Tombol Mulai -->
@@ -34,17 +35,35 @@
     Mulai Game
   </button>
 
+  <!-- Tombol Klaim WA -->
+  <button id="claimBtn"
+    class="hidden mt-4 bg-green-500 text-white px-5 py-2 rounded-xl hover:bg-green-600 transition">
+    Klaim Diskon via WhatsApp 💬
+  </button>
+
   <a href="index.html" class="mt-4 text-pink-600 hover:underline text-sm">← Kembali ke Halaman Utama</a>
 
   <script>
     const gameArea = document.getElementById('gameArea');
+    const player = document.getElementById('player');
     const startBtn = document.getElementById('startBtn');
+    const claimBtn = document.getElementById('claimBtn');
     const scoreDisplay = document.getElementById('score');
     const timeDisplay = document.getElementById('time');
 
     let score = 0;
     let time = 30;
+    let hearts = [];
     let gameInterval, timerInterval;
+    let playerPos = 140;
+    const targetScore = 10; // minimal poin buat dapat diskon
+    const waNumber = "62895415549098"; // ganti dengan nomor WA kamu
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft' && playerPos > 0) playerPos -= 20;
+      else if (e.key === 'ArrowRight' && playerPos < 260) playerPos += 20;
+      player.style.left = playerPos + 'px';
+    });
 
     startBtn.addEventListener('click', startGame);
 
@@ -54,7 +73,7 @@
       scoreDisplay.textContent = score;
       timeDisplay.textContent = time;
       startBtn.disabled = true;
-      startBtn.classList.add('opacity-50', 'cursor-not-allowed');
+      claimBtn.classList.add('hidden');
 
       timerInterval = setInterval(() => {
         time--;
@@ -62,46 +81,64 @@
         if (time <= 0) endGame();
       }, 1000);
 
-      gameInterval = setInterval(spawnGem, 800);
+      gameInterval = setInterval(spawnHeart, 800);
     }
 
-    function spawnGem() {
-      const gem = document.createElement('div');
-      gem.classList.add('absolute', 'w-8', 'h-8', 'bg-pink-500', 'rounded-full', 'cursor-pointer', 'shadow-md', 'transition-transform');
-      gem.style.left = Math.random() * 260 + 'px';
-      gem.style.top = '0px';
-      gameArea.appendChild(gem);
+    function spawnHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('absolute', 'text-pink-500', 'text-2xl');
+      heart.textContent = '❤';
+      heart.style.left = Math.random() * 260 + 'px';
+      heart.style.top = '0px';
+      gameArea.appendChild(heart);
 
-      let pos = 0;
+      let fallPos = 0;
       const fall = setInterval(() => {
-        pos += 5;
-        gem.style.top = pos + 'px';
-        if (pos >= 360) {
-          gem.remove();
+        fallPos += 5;
+        heart.style.top = fallPos + 'px';
+
+        const heartRect = heart.getBoundingClientRect();
+        const playerRect = player.getBoundingClientRect();
+
+        if (
+          heartRect.bottom >= playerRect.top &&
+          heartRect.left >= playerRect.left &&
+          heartRect.right <= playerRect.right
+        ) {
+          score++;
+          scoreDisplay.textContent = score;
+          heart.remove();
+          clearInterval(fall);
+        }
+
+        if (fallPos > 360) {
+          heart.remove();
           clearInterval(fall);
         }
       }, 50);
 
-      gem.addEventListener('click', () => {
-        score++;
-        scoreDisplay.textContent = score;
-        gem.remove();
-        clearInterval(fall);
-      });
-
-      setTimeout(() => {
-        gem.remove();
-        clearInterval(fall);
-      }, 4000);
+      hearts.push(heart);
     }
 
     function endGame() {
       clearInterval(gameInterval);
       clearInterval(timerInterval);
+      hearts.forEach(h => h.remove());
       startBtn.disabled = false;
-      startBtn.classList.remove('opacity-50', 'cursor-not-allowed');
-      alert(`Waktu habis! Skor akhir kamu: ${score}`);
+
+      if (score >= targetScore) {
+        alert(`🎉 Selamat! Kamu dapat diskon karena berhasil tangkap ${score} hati!`);
+        claimBtn.classList.remove('hidden');
+      } else {
+        alert(`Waktu habis! Skor kamu ${score}. Coba lagi untuk dapatkan diskon 💕`);
+      }
     }
+
+    claimBtn.addEventListener('click', () => {
+      const message = `Hai PinkEast! Aku udah dapet ${score} poin dari game Tangkap Hati 💗 Boleh klaim diskon dong~`;
+      const url = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
+      window.open(url, '_blank');
+    });
   </script>
 
 </body>
